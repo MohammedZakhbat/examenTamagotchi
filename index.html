@@ -1,13 +1,111 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./output.css">
-    <title>Tamagotchi Pro</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./output.css">
+  <title>Tamagotchi Pro</title>
 </head>
-<body>
-    
-    <script src="app.js"></script>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center p-6">
+
+  <div class="w-full max-w-6xl bg-white rounded-[40px] shadow-2xl overflow-hidden border border-slate-200">
+
+    <div class="grid lg:grid-cols-2 gap-10 p-10">
+
+      <div class="flex items-center justify-center relative">
+        <div class="absolute w-72 h-72 bg-yellow-300 rounded-full blur-3xl opacity-30"></div>
+
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-br from-yellow-200 to-orange-300 rounded-[40px] blur-2xl opacity-40 scale-110"></div>
+
+          <div class="relative bg-gradient-to-br from-yellow-100 to-orange-100 rounded-[40px] p-10 border border-yellow-200 shadow-xl">
+            <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" class="w-[260px] drop-shadow-2xl hover:rotate-2 hover:scale-105 transition duration-500" />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center">
+
+        <div class="mb-10">
+          <p class="uppercase tracking-[8px] text-slate-400 font-bold mb-3">Virtual Game</p>
+          <h1 class="text-6xl font-black text-slate-800 leading-none">Tamagotchi</h1>
+          <div class="w-32 h-2 bg-gradient-to-r from-pink-500 to-orange-400 rounded-full mt-5"></div>
+        </div>
+
+        <div class="space-y-7">
+
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-bold">❤️ Salud</span>
+              <span id="saludText" class="font-black text-red-500">0</span>
+            </div>
+            <div class="h-5 bg-slate-200 rounded-full overflow-hidden">
+              <div id="saludBar" class="h-full bg-red-500" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-bold">😊 Felicidad</span>
+              <span id="felicidadText" class="font-black text-yellow-500">0</span>
+            </div>
+            <div class="h-5 bg-slate-200 rounded-full overflow-hidden">
+              <div id="felicidadBar" class="h-full bg-yellow-400" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-bold">🧼 Limpieza</span>
+              <span id="limpiezaText" class="font-black text-cyan-500">0</span>
+            </div>
+            <div class="h-5 bg-slate-200 rounded-full overflow-hidden">
+              <div id="limpiezaBar" class="h-full bg-cyan-500" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-bold">⚡ Energía</span>
+              <span id="energiaText" class="font-black text-green-500">0</span>
+            </div>
+            <div class="h-5 bg-slate-200 rounded-full overflow-hidden">
+              <div id="energiaBar" class="h-full bg-green-500" style="width:0%"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="message" class="mt-10 text-center text-xl font-black text-slate-700"></div>
+
+      </div>
+    </div>
+
+    <div class="bg-slate-100 border-t p-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+        <button id="alimentar" class="bg-white hover:bg-green-500 hover:text-white font-bold py-4 rounded-2xl shadow-lg">🍎 Alimentar</button>
+        <button id="jugar" class="bg-white hover:bg-yellow-400 hover:text-white font-bold py-4 rounded-2xl shadow-lg">🤡 Jugar</button>
+        <button id="dormir" class="bg-white hover:bg-indigo-500 hover:text-white font-bold py-4 rounded-2xl shadow-lg">😴 Dormir</button>
+        <button id="duchar" class="bg-white hover:bg-cyan-500 hover:text-white font-bold py-4 rounded-2xl shadow-lg">🚿 Duchar</button>
+        <button id="reprender" class="bg-white hover:bg-red-500 hover:text-white font-bold py-4 rounded-2xl shadow-lg">😡 Reprender</button>
+        <button id="acariciar" class="bg-white hover:bg-pink-500 hover:text-white font-bold py-4 rounded-2xl shadow-lg">🥰 Acariciar</button>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="gameOverScreen" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50">
+    <div class="text-center bg-white/10 border border-white/20 rounded-3xl p-10 shadow-2xl">
+      <h1 class="text-6xl font-black text-red-500 animate-pulse">GAME OVER</h1>
+      <p class="text-white mt-4 text-lg">💀 Tu Tamagotchi no sobrevivió</p>
+      <button id="restartBtn" onclick="location.reload()" class="mt-8 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-2xl transition hover:scale-105">
+        🔄 Volver a jugar
+      </button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
