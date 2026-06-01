@@ -71,50 +71,100 @@ class Tamagotchi {
   }
 
   verificarEstado = () => {
-  const message = document.getElementById("message");
+    const message = document.getElementById("message");
 
-  if (
-    this.salud === 0 ||
-    this.felicidad === 0 ||
-    this.limpieza === 0 ||
-    this.energia === 0
-  ) {
-    message.innerText = "💀 El Tamagotchi ha muerto...";
+    if (
+      this.salud === 0 ||
+      this.felicidad === 0 ||
+      this.limpieza === 0 ||
+      this.energia === 0
+    ) {
+      message.innerText = "💀 El Tamagotchi ha muerto...";
 
-    clearInterval(intervalo);
-    desactivarBotones();
+     
+      detenerJuego();
 
-    setTimeout(() => {
-      document.getElementById("gameOverScreen").classList.remove("hidden");
-    }, 2000);
+      setTimeout(() => {
+        document
+          .getElementById("gameOverScreen")
+          .classList.remove("hidden");
+      }, 1000);
 
-    return;
-  }
+      return;
+    }
 
-  message.innerText = "🐣 Tamagotchi Vivo";
-};
+    message.innerText = "🐣 Tamagotchi Vivo";
+  };
 }
+
+
+
 
 const tamagotchi = new Tamagotchi("Neo");
 tamagotchi.mostrar();
 
-document.getElementById("alimentar").addEventListener("click", tamagotchi.alimentar);
-document.getElementById("jugar").addEventListener("click", tamagotchi.jugar);
-document.getElementById("dormir").addEventListener("click", tamagotchi.dormir);
-document.getElementById("duchar").addEventListener("click", tamagotchi.duchar);
-document.getElementById("reprender").addEventListener("click", tamagotchi.reprender);
-document.getElementById("acariciar").addEventListener("click", tamagotchi.acariciar);
 
-function desactivarBotones() {
-  const botones = document.querySelectorAll("button");
+const accionesBotones = [
+  {
+    elemento: document.getElementById("alimentar"),
+    handler: tamagotchi.alimentar
+  },
+  {
+    elemento: document.getElementById("jugar"),
+    handler: tamagotchi.jugar
+  },
+  {
+    elemento: document.getElementById("dormir"),
+    handler: tamagotchi.dormir
+  },
+  {
+    elemento: document.getElementById("duchar"),
+    handler: tamagotchi.duchar
+  },
+  {
+    elemento: document.getElementById("reprender"),
+    handler: tamagotchi.reprender
+  },
+  {
+    elemento: document.getElementById("acariciar"),
+    handler: tamagotchi.acariciar
+  }
+];
 
-  botones.forEach(boton => {
-    if (boton.id !== "restartBtn") {
-      boton.disabled = true;
-      boton.classList.add("opacity-40", "cursor-not-allowed");
-    }
+
+
+accionesBotones.forEach(act => {
+  act.elemento.addEventListener(
+    "click",
+    act.handler
+  );
+});
+
+
+
+
+function detenerJuego() {
+
+  clearInterval(intervalo);
+
+  accionesBotones.forEach(act => {
+
+    act.elemento.removeEventListener(
+      "click",
+      act.handler
+    );
+
+    act.elemento.disabled = true;
+
+    act.elemento.classList.add(
+      "opacity-40",
+      "cursor-not-allowed"
+    );
   });
 }
+
+
+
 
 const intervalo = setInterval(() => {
   tamagotchi.disminuir();
